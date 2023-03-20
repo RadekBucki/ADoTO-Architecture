@@ -7,7 +7,7 @@ component "iOS mobile frontend" as ios
 
 component "Backend" as backend
 
-component "Analytics" as analytics
+component "Data analysis" as analytics
 
 web -(0- backend: GraphQL
 android -(0- backend: GraphQL
@@ -55,6 +55,33 @@ Rel(frontendIos, api, "API calls", "graphql")
 Rel_R(db, api, "Reads")
 Rel_R(api, db, "Writes")
 Rel(api, dataAnalysis, "Jython")
+
+@enduml
+```
+# Adapter for communication with data analysis module
+```plantuml
+@startuml
+
+component "Backend" as backend {
+    class Adapter1 {
+        + execute(String filename, String[] args): String
+    }
+    class Adapter2 {
+        + execute(String filename, String[] args): String
+    }
+}
+
+component "Data analysis" as analytics {
+    class DataOperation1 {
+        + execute(String[] args): String
+    }
+    class DataOperation2 {
+        + execute(String[] args): String
+    }
+}
+
+Adapter1 -(0- DataOperation1: Jython
+Adapter2 -(0- DataOperation2: Jython
 
 @enduml
 ```
