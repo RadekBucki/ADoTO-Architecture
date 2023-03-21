@@ -183,7 +183,7 @@ Container_Boundary(c2, Backend) {
 Component_Ext(be,"backend", "spring", "Backend")
 }
 Container_Boundary(c4, Database) {
-Component(dbbecommunication,"Communication with BE", "spring", "Database to backend communication", "spring")
+Component(dbbecommunication,"Communication with BE", "hibernate", "Database to backend communication")
 ComponentDb(db,"Database", "postGIS", "Database - PostGIS","postgresql")
 }
 Rel_R(be, dbbecommunication, "Uses")
