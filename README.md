@@ -59,7 +59,7 @@ System_Boundary(c1, "ADoTO") {
 Container(frontend, "Frontend", "web", "Web interface", $sprite="react_original")
 Container(backend, "Backend", "java + spring", "Business logic", $sprite="spring")
 Container(dataAnalysis, "Data analysis", "python", "Data analysis module", $sprite="python")
-ContainerDb(db, "Database", "PostGIS", "Data storing", $sprite="postgresql")
+Container(db, "Database service", "PostGIS", "Data storing", $sprite="postgresql")
 }
 Container_Ext(geoportal, "Maps data API", "BDOT10k & Satellite maps", "API GeoPortal")
 
@@ -182,7 +182,7 @@ LAYOUT_WITH_LEGEND()
 Container_Boundary(c2, Backend) {
 Component_Ext(be,"backend", "spring", "Backend")
 }
-Container_Boundary(c4, Database) {
+Container_Boundary(c4, Database service) {
 Component(dbbecommunication,"Communication with BE", "hibernate", "Database to backend communication")
 ComponentDb(db,"Database", "postGIS", "Database - PostGIS","postgresql")
 }
