@@ -1,0 +1,32 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!define DEVICONS2 https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons2
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include DEVICONS2/react_original.puml
+!include DEVICONS2/spring.puml
+!include DEVICONS2/postgresql.puml
+!include DEVICONS2/python.puml
+!include FONTAWESOME/users.puml
+
+LAYOUT_WITH_LEGEND()
+
+Person(user, "User", "System users", $sprite="users")
+
+System_Boundary(c1, "ADoTO") {
+    Container(frontend, "Frontend", "web", "Web interface", $sprite="react_original")
+    Container(backend, "Backend", "java + spring", "Business logic", $sprite="spring")
+    Container(dataAnalysis, "Data analysis", "python", "Data analysis module", $sprite="python")
+    Container(db, "Database service", "PostGIS", "Data storing", $sprite="postgresql")
+}
+Container_Ext(geoportal, "Maps data API", "BDOT10k & Satellite maps", "API GeoPortal")
+
+Rel(user, frontend, "Uses", "https")
+Rel(frontend, backend, "API calls", "rest")
+Rel_R(db, backend, "Reads")
+Rel_R(backend, db, "Writes")
+Rel_L(backend, dataAnalysis, "API calls", "rest")
+Rel_R(dataAnalysis, backend, "API calls", "rest")
+Rel(backend, geoportal, "API calls", "xml")
+
+@enduml
