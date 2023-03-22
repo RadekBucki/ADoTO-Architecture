@@ -6,3 +6,4 @@
 4. [Backend](Backend/README.md)
 5. [Data analysis](DataAnalysis/README.md)
 6. [Database service](DatabaseService/README.md)
+7. [Sequence diagrams](Sequence.md)
