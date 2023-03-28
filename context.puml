@@ -1,0 +1,16 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+Person(users, "Users", "System users")
+
+System(systemAlias, "ADoTO", "Automatic Detection of Topographic Objects System")
+System_Ext(geoportal, "Maps data", "BDOT10k & Satellite maps", "API GeoPortal")
+
+Rel(users, systemAlias, "Supplying data", "Data about analyzed objects - maps or coordinates")
+Rel(systemAlias, users, "Results", "Object search results, comparisons with GeoPortal")
+
+Rel(systemAlias, geoportal, "Map and building data", "Comparing the data available in the geoportal with those received from the AI module, and providing photomaps")
+
+@enduml

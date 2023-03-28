@@ -1,0 +1,31 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+!define DEVICONS2 https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons2
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include DEVICONS2/spring.puml
+!include DEVICONS2/flask_original.puml
+
+LAYOUT_WITH_LEGEND()
+
+Container_Boundary(c1, Frontend) {
+    Component_Ext(febecommunication,"Communication with BE", "axios", "Frontend to backend communication")
+}
+Container_Boundary(c2, Backend) {
+    Component(be,"backend", "spring", "Backend", "spring")
+    Component(beapicommunication,"backend", "spring + jsoup", "Backend to GeoPortal API communication", "spring")
+}
+Container_Boundary(c3, Data analysis) {
+    Component_Ext(aibecommunication,"Communication with BE", "flask", "Data analysis module to backend communication", "flask_original")
+}
+Container_Boundary(c4, Database) {
+    Component_Ext(dbbecommunication,"Communication with BE", "hibernate", "Database to backend communication")
+}
+Container_Ext(geoportal, "Maps data API", "BDOT10k & Satellite maps", "API GeoPortal")
+Rel(febecommunication, be, "API calls")
+Rel(be, beapicommunication, "Uses")
+Rel(beapicommunication, geoportal, "API calls")
+Rel_L(be, aibecommunication, "API calls")
+Rel_R(be, dbbecommunication, "Uses")
+
+@enduml

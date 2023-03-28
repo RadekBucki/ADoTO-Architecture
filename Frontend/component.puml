@@ -1,0 +1,22 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+!define DEVICONS2 https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons2
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include DEVICONS2/react_original.puml
+!include DEVICONS2/spring.puml
+
+LAYOUT_WITH_LEGEND()
+
+Container_Boundary(c1, Frontend) {
+    Component(fe,"UI elements", "reactjs", "Frontend UI component", "react_original")
+    Component(febecommunication,"Communication with BE", "axios", "Frontend to backend communication")
+}
+Container_Boundary(c2, Backend) {
+    Component_Ext(be,"backend", "spring", "Backend", "spring")
+}
+Rel(fe, febecommunication, "Uses")
+Rel(febecommunication, be, "API calls", "rest")
+
+
+@enduml
